@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Vaccap</string>
+    <string name="don_t_have_an_account_signup">don_t_have_an_account_signup</string>
+    <string name="a_bottle_holding_a_needle">a_bottle_holding_a_needle</string>
 </resources>

@@ -10,4 +10,9 @@
         android:name="com.example.vaccap.MainActivity"
         android:label="activity_main"
         tools:layout="@layout/activity_main" />
+    <activity
+        android:id="@+id/authenticationActivity"
+        android:name="com.example.vaccap.AuthenticationActivity"
+        android:label="activity_authentication"
+        tools:layout="@layout/activity_authentication" />
 </navigation>
