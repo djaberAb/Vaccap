@@ -8,7 +8,6 @@ import android.widget.Button;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class AuthenticationActivity extends AppCompatActivity{
-    private Button signInBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

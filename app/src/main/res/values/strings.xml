@@ -2,4 +2,9 @@
     <string name="app_name">Vaccap</string>
     <string name="don_t_have_an_account_signup">don_t_have_an_account_signup</string>
     <string name="a_bottle_holding_a_needle">a_bottle_holding_a_needle</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="don_t_have_an_account_sign_up">Don\'t have an account sign up</string>
+    <string name="reset_password">Reset Password</string>
+    <string name="sign_in">Sign in</string>
 </resources>
