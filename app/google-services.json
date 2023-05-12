@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1053968336796",
+    "project_id": "vaccapp-132a0",
+    "storage_bucket": "vaccapp-132a0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1053968336796:android:ed7b11d52d95db0a306a59",
+        "android_client_info": {
+          "package_name": "com.example.vaccap"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1053968336796-0fbsmg88bs9l1ldi1v14g0nketsc4h49.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDmR90yr9433UJ04rdtFdXb8x_fbJn1UmY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1053968336796-0fbsmg88bs9l1ldi1v14g0nketsc4h49.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
