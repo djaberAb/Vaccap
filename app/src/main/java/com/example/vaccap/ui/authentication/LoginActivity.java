@@ -1,4 +1,4 @@
-package com.example.vaccap;
+package com.example.vaccap.ui.authentication;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,6 +12,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.vaccap.MainActivity;
+import com.example.vaccap.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -19,10 +21,12 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class LoginActivity extends AppCompatActivity {
 
-    EditText emailInput;
-    EditText passwordInput;
-    Button loginButton;
-    TextView signupLink;
+    private EditText emailInput;
+    private EditText passwordInput;
+    private Button loginButton;
+
+    private TextView resetPassordButton;
+    private TextView signupLink;
 
     private FirebaseAuth mAuth;
 
@@ -35,11 +39,12 @@ public class LoginActivity extends AppCompatActivity {
         passwordInput = findViewById(R.id.password);
         loginButton = findViewById(R.id.signup_btn);
         signupLink = findViewById(R.id.tv_signupLink);
+        resetPassordButton = findViewById(R.id.reset_password);
 
         mAuth = FirebaseAuth.getInstance();
-
         loginButton.setOnClickListener(view -> loginUser());
         signupLink.setOnClickListener(view -> startActivity(new Intent(LoginActivity.this, RegistrationActivity.class)));
+        resetPassordButton.setOnClickListener(view ->startActivity(new Intent(LoginActivity.this, PasswordResetActivity.class)));
     }
 
     private void loginUser() {

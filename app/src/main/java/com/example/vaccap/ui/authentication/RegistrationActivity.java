@@ -1,4 +1,4 @@
-package com.example.vaccap;
+package com.example.vaccap.ui.authentication;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,6 +12,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.vaccap.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -20,12 +21,8 @@ import com.google.firebase.auth.FirebaseAuth;
 public class RegistrationActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
-    EditText emailInput;
-    EditText passwordInput;
-    TextView signinLink;
-    EditText usernameInput;
-
-    Button signup_Btn;
+    private EditText emailInput;
+    private EditText passwordInput;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,9 +31,8 @@ public class RegistrationActivity extends AppCompatActivity {
 
         emailInput = findViewById(R.id.email);
         passwordInput = findViewById(R.id.password);
-        usernameInput = findViewById(R.id.name);
-        signinLink = findViewById(R.id.signin_link);
-        signup_Btn = findViewById(R.id.signup_btn);
+        TextView signinLink = findViewById(R.id.signin_link);
+        Button signup_Btn = findViewById(R.id.signup_btn);
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -46,11 +42,10 @@ public class RegistrationActivity extends AppCompatActivity {
     }
 
     private void CreateUser() {
-        String username = usernameInput.getText().toString();
         String email = emailInput.getText().toString();
         String password = passwordInput.getText().toString();
 
-        if (validateInput(username, email, password)) {
+        if (validateInput(email, password)) {
             mAuth.createUserWithEmailAndPassword(email, password)
                     .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override
@@ -69,12 +64,8 @@ public class RegistrationActivity extends AppCompatActivity {
     }
 
 
-    private boolean validateInput(String username, String email, String password) {
-        if (username.isEmpty()) {
-            Toast.makeText(this, "Please enter your username.", Toast.LENGTH_SHORT).show();
-            usernameInput.requestFocus();
-            return false;
-        }
+    private boolean validateInput(String email, String password) {
+
         if (email.isEmpty()) {
             Toast.makeText(this, "Please enter your email address.", Toast.LENGTH_SHORT).show();
             emailInput.requestFocus();

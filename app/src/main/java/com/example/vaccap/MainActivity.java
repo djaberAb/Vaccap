@@ -6,6 +6,7 @@ import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.vaccap.ui.authentication.LoginActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -23,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
 
         logoutBtn.setOnClickListener(view->{
-            startActivity(new Intent(MainActivity.this, RegistrationActivity.class));
+            startActivity(new Intent(MainActivity.this, LoginActivity.class));
         });
 
     }

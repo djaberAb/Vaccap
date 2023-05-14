@@ -7,4 +7,11 @@
     <string name="don_t_have_an_account_sign_up">Don\'t have an account sign up</string>
     <string name="reset_password">Reset Password</string>
     <string name="sign_in">Sign in</string>
+    <string name="forgot_your_password">Forgot your password?</string>
+    <string name="enter_your_registered_email">Enter your registered email</string>
+    <string name="please_enter_your_registered_email_to_receive_password_reset_link">Please enter your registered email to receive password reset link</string>
+    <string name="email">Email*</string>
+    <string name="enter_your_email_here">Enter your email here</string>
+    <string name="entre_your_email_adress">Entre your Email adress</string>
+    <string name="back_to_login">Back to Login</string>
 </resources>
