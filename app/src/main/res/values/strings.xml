@@ -14,4 +14,8 @@
     <string name="enter_your_email_here">Enter your email here</string>
     <string name="entre_your_email_adress">Entre your Email adress</string>
     <string name="back_to_login">Back to Login</string>
+    <string name="appointement">Appointement</string>
+    <string name="more_information">More Information</string>
+    <string name="navigation_drawer_open">Open</string>
+    <string name="navigation_drawer_close">Close</string>
 </resources>
