@@ -5,12 +5,16 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.example.vaccap.R;
+import com.example.vaccap.databinding.ActivityAppointmentsBinding;
 
-public class AppointmentsActivity extends AppCompatActivity {
+public class AppointmentsActivity extends DrawerBaseActivity {
 
+    ActivityAppointmentsBinding activityAppointmentsBinding;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_appointments);
+        activityAppointmentsBinding = ActivityAppointmentsBinding.inflate(getLayoutInflater());
+        allocateActivityTitles("Appointments");
+        setContentView(activityAppointmentsBinding.getRoot());
     }
 }
