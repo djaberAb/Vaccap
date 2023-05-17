@@ -14,7 +14,7 @@ public class SearchActivity extends DrawerBaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         activitySearchBinding = ActivitySearchBinding.inflate(getLayoutInflater());
-        allocateActivityTitles("Search");
         setContentView(activitySearchBinding.getRoot());
+        allocateActivityTitles("Search");
     }
 }

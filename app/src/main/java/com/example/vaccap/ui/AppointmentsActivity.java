@@ -14,7 +14,7 @@ public class AppointmentsActivity extends DrawerBaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         activityAppointmentsBinding = ActivityAppointmentsBinding.inflate(getLayoutInflater());
-        allocateActivityTitles("Appointments");
         setContentView(activityAppointmentsBinding.getRoot());
+        allocateActivityTitles("Appointments");
     }
 }

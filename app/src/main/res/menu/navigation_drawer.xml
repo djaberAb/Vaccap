@@ -1,53 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item
-        android:title="Vaccap"
-        android:id="@+id/main">
-        <menu>
-            <item
-                android:id="@+id/home"
-                android:title="Home"
-                android:icon="@drawable/baseline_home_24"
-                />
-            <item
-                android:id="@+id/appointments"
-                android:title="Appointments"
-                android:icon="@drawable/baseline_calendar_month_24"
-                />
-            <item
-                android:id="@+id/searchClinic"
-                android:title="Search"
-                android:icon="@drawable/baseline_location_searching_24"
-                />
-            <item
-                android:id="@+id/about"
-                android:title="About"
-                android:icon="@drawable/baseline_help_center_24"
-                />
-
-        </menu>
-    </item>
-    <item
-        android:id="@+id/other"
-        android:title="Other">
-        <menu>
-            <item
-                android:id="@+id/profile"
-                android:title="Profile"
-                android:icon="@drawable/baseline_person_24"
+    <group
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_home"
+            android:title="@string/home"
+            android:icon="@drawable/baseline_home_24"
             />
         <item
-            android:id="@+id/settings"
-            android:title="Settings"
-            android:icon="@drawable/baseline_settings_24"
+            android:id="@+id/nav_appointments"
+            android:title="@string/appointments"
+            android:icon="@drawable/baseline_calendar_month_24"
+        />
+        <item
+            android:id="@+id/nav_searchClinic"
+            android:title="@string/search"
+            android:icon="@drawable/baseline_location_searching_24"
             />
-            <item
-                android:id="@+id/logout"
-                android:title="Log out"
-                android:icon="@drawable/baseline_logout_24"
-                />
-
-
-        </menu>
-    </item>
+        <item
+            android:id="@+id/nav_about"
+            android:title="@string/about"
+            android:icon="@drawable/baseline_help_center_24"
+            />
+        <item
+            android:id="@+id/nav_profile"
+            android:title="@string/profile"
+            android:icon="@drawable/baseline_person_24"
+        />
+        <item
+            android:id="@+id/nav_settings"
+            android:title="@string/settings"
+            android:icon="@drawable/baseline_settings_24"
+        />
+        <item
+            android:id="@+id/nav_logout"
+            android:title="@string/log_out"
+            android:icon="@drawable/baseline_logout_24"
+        />
+    </group>
 </menu>

@@ -14,7 +14,7 @@ public class ProfileActivity extends DrawerBaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         activityProfileBinding = ActivityProfileBinding.inflate(getLayoutInflater());
-        allocateActivityTitles("Profile");
         setContentView(activityProfileBinding.getRoot());
+        allocateActivityTitles("Profile");
     }
 }

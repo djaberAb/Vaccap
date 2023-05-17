@@ -15,7 +15,7 @@ public class AboutActivity extends DrawerBaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         activityAboutBinding = ActivityAboutBinding.inflate(getLayoutInflater());
-        allocateActivityTitles("About");
         setContentView(activityAboutBinding.getRoot());
+        allocateActivityTitles("About");
     }
 }

@@ -18,8 +18,8 @@ public class MainActivity extends DrawerBaseActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         activityMainBinding = ActivityMainBinding.inflate(getLayoutInflater());
-        allocateActivityTitles("Home");
         setContentView(activityMainBinding.getRoot());
+        allocateActivityTitles("Home");
 
 
 
