@@ -25,4 +25,14 @@
     <string name="search">Search</string>
     <string name="appointments">Appointments</string>
     <string name="home">Home</string>
+    <string name="edit_profile">Edit Profile</string>
+    <string name="date_of_birth">date of birth</string>
+    <string name="baby_s_birthday">Baby\'s birthday</string>
+    <string name="rajaa">Rajaa</string>
+    <string name="user_name">User Name</string>
+    <string name="first_name">first name</string>
+    <string name="raja">Raja</string>
+    <string name="full_name">Full Name</string>
+    <string name="phone_number">Phone Number</string>
+    <string name="baby_s_name">Baby\'s Name</string>
 </resources>

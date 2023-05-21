@@ -13,14 +13,24 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.vaccap.R;
+import com.example.vaccap.models.User;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
 
 public class RegistrationActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
+
     private EditText emailInput;
     private EditText passwordInput;
 
@@ -29,8 +39,8 @@ public class RegistrationActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration);
 
-        emailInput = findViewById(R.id.email);
-        passwordInput = findViewById(R.id.password);
+        emailInput = findViewById(R.id.emailSignup);
+        passwordInput = findViewById(R.id.passwordSignup);
         TextView signinLink = findViewById(R.id.signin_link);
         Button signup_Btn = findViewById(R.id.signup_btn);
 
@@ -51,6 +61,31 @@ public class RegistrationActivity extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
+
+                                // Get the user's ID
+                                String userID = Objects.requireNonNull(mAuth.getCurrentUser()).getUid();
+
+                                // Create a new User object with null values
+                                User user = new User(email, "", "", "", "", "");
+                                db.collection("users").document(userID)
+                                        .set(user.toMap())
+                                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                            @Override
+                                            public void onSuccess(Void unused) {
+                                                Toast.makeText(RegistrationActivity.this, "User registered successfully", Toast.LENGTH_SHORT).show();
+                                                // Proceed to the next fragment or activity
+                                                startActivity(new Intent(RegistrationActivity.this, LoginActivity.class));
+                                            }
+                                        })
+                                        .addOnFailureListener(new OnFailureListener() {
+                                            @Override
+                                            public void onFailure(@NonNull Exception e) {
+                                                // If sign up fails, display a message to the user.
+                                                Toast.makeText(RegistrationActivity.this, "Registration failed.", Toast.LENGTH_SHORT).show();
+                                            }
+                                        });
+
+
                                 Toast.makeText(RegistrationActivity.this, "User registered successfully", Toast.LENGTH_SHORT).show();
                                 // Proceed to the next fragment or activity
                                 startActivity(new Intent(RegistrationActivity.this, LoginActivity.class));
@@ -62,6 +97,7 @@ public class RegistrationActivity extends AppCompatActivity {
                     });
         }
     }
+
 
 
     private boolean validateInput(String email, String password) {

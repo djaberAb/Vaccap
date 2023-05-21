@@ -9,4 +9,9 @@
     <color name="white">#FFFFFFFF</color>
     <color name="green_vaccap">#E9FDF2</color>
     <color name="green_drk">#009587</color>
+    <color name="blue_vaccapps">#79E0EE</color>
+    <color name="mint">#98EECC</color>
+    <color name="greenWhite_vaccapps">#D0F5BE</color>
+    <color name="yellow_vaccapps">#FBFFDC</color>
+    <color name="etColor">#F4FFEE</color>
 </resources>
