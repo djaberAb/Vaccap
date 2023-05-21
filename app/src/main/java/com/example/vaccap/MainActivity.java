@@ -3,8 +3,6 @@ package com.example.vaccap;
 import android.content.Intent;
 import android.os.Bundle;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import com.example.vaccap.databinding.ActivityMainBinding;
 import com.example.vaccap.ui.DrawerBaseActivity;
 import com.example.vaccap.ui.authentication.LoginActivity;
