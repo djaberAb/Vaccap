@@ -15,6 +15,7 @@ import android.widget.FrameLayout;
 import com.example.vaccap.MainActivity;
 import com.example.vaccap.R;
 import com.example.vaccap.ui.authentication.LoginActivity;
+import com.example.vaccap.ui.profile.ProfileActivity;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 

@@ -3,57 +3,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="@drawable/pbackground"
     android:layout_height="match_parent"
-    tools:context=".ui.profile.ProfileActivity">
-
-    <com.google.android.material.imageview.ShapeableImageView
-        android:id="@+id/profileImg"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_margin="60dp"
-        android:layout_marginTop="72dp"
-        android:adjustViewBounds="false"
-        android:src="@drawable/baseline_person_24"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Full" />
-
-    <TextView
-        android:id="@+id/titleUserName"
-        android:layout_width="wrap_content"
-        android:layout_height="24dp"
-        android:layout_marginTop="24dp"
-        android:text="@string/rajaa"
-        android:textColor="@color/black"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@+id/profileImg"
-        app:layout_constraintStart_toStartOf="@+id/profileImg"
-        app:layout_constraintTop_toBottomOf="@+id/profileImg"
-        tools:ignore="TextSizeCheck" />
-
-    <TextView
-        android:id="@+id/titleLFullName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:text="@string/raja"
-        android:textColor="@color/black"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="@+id/titleUserName"
-        app:layout_constraintHorizontal_bias="0.533"
-        app:layout_constraintStart_toStartOf="@+id/titleUserName"
-        app:layout_constraintTop_toBottomOf="@+id/titleUserName" />
+    android:background="@drawable/pbackground"
+    tools:context=".ui.profile.EditProfileActivity">
 
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="48dp"
         android:layout_marginEnd="24dp"
         android:background="@color/cardview_light_background"
         android:elevation="5dp"
@@ -62,14 +21,14 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/titleLFullName">
+        app:layout_constraintTop_toBottomOf="@+id/tvUpdateProfile">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:orientation="horizontal"
-            android:padding="18dp">
+            android:padding="20dp">
 
             <TextView
                 android:id="@+id/userNamepr"
@@ -80,12 +39,15 @@
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
-            <TextView
+            <EditText
                 android:id="@+id/edituserNamepr"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="@string/first_name"
+                android:autofillHints="username"
+                android:inputType="textPersonName"
+                android:minHeight="48dp"
+                android:text="user name"
                 android:textAlignment="viewEnd"
                 android:textColor="#757575"
                 android:textSize="18sp" />
@@ -97,7 +59,7 @@
             android:layout_height="match_parent"
             android:layout_marginStart="10dp"
             android:orientation="horizontal"
-            android:padding="18dp">
+            android:padding="20dp">
 
             <TextView
                 android:id="@+id/fullNamepr"
@@ -108,11 +70,14 @@
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/fullNameSignup"
+            <EditText
+                android:id="@+id/editFullNamepr"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:autofillHints="name"
+                android:inputType="textPersonName"
+                android:minHeight="48dp"
                 android:text="full name"
                 android:textAlignment="viewEnd"
                 android:textColor="#757575"
@@ -124,7 +89,7 @@
             android:layout_height="match_parent"
             android:layout_marginStart="10dp"
             android:orientation="horizontal"
-            android:padding="18dp">
+            android:padding="20dp">
 
             <TextView
                 android:id="@+id/phoneNumbertt"
@@ -135,11 +100,14 @@
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/fullNamesignup"
+            <EditText
+                android:id="@+id/editPhoneNumberpr"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:autofillHints="phone"
+                android:inputType="phone"
+                android:minHeight="48dp"
                 android:text="phone number"
                 android:textAlignment="viewEnd"
                 android:textColor="#757575"
@@ -152,7 +120,7 @@
             android:layout_marginStart="10dp"
             android:elevation="@dimen/cardview_compat_inset_shadow"
             android:orientation="horizontal"
-            android:padding="18dp">
+            android:padding="20dp">
 
             <TextView
                 android:id="@+id/namebabytt"
@@ -163,11 +131,14 @@
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/nameBabySignup"
+            <EditText
+                android:id="@+id/editNameBabypr"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:autofillHints="name"
+                android:inputType="textPersonName"
+                android:minHeight="48dp"
                 android:text="baby's name"
                 android:textAlignment="viewEnd"
                 android:textColor="#757575"
@@ -180,7 +151,7 @@
             android:layout_marginStart="10dp"
             android:elevation="@dimen/cardview_compat_inset_shadow"
             android:orientation="horizontal"
-            android:padding="18dp">
+            android:padding="20dp">
 
             <TextView
                 android:id="@+id/birthDatett"
@@ -191,11 +162,13 @@
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/dateOfBirthSignup"
+            <EditText
+                android:id="@+id/editDateOfBirthpr"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:inputType="date"
+                android:minHeight="48dp"
                 android:text="@string/date_of_birth"
                 android:textAlignment="viewEnd"
                 android:textColor="#757575"
@@ -204,18 +177,29 @@
 
     </LinearLayout>
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/editProfileBtn"
+    <Button
+        android:id="@+id/updateBtn"
+        android:layout_width="208dp"
+        android:layout_height="65dp"
+        android:layout_marginTop="32dp"
+        android:text="Update"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/linearLayout"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="@+id/linearLayout"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+
+    <TextView
+        android:id="@+id/tvUpdateProfile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:paddingHorizontal="40dp"
-        android:paddingVertical="13dp"
-        android:text="@string/edit_profile"
-        android:textSize="20sp"
+        android:layout_marginTop="52dp"
+        android:text="Update Profile"
+        android:textColor="@color/black"
+        android:textStyle="bold|italic"
+        android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

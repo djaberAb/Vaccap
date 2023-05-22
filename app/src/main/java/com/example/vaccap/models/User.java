@@ -1,7 +1,9 @@
 package com.example.vaccap.models;
 
 
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.Exclude;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -89,4 +91,19 @@ public class User {
         return result;
 
     }
+
+    public static User fromSnapshot(DocumentSnapshot snapshot) {
+        User user = new User();
+        // Get the document data as a map
+        Map<String, Object> userData = snapshot.getData();
+        user.setEmail((String) userData.get("email"));
+        user.setUserName((String) userData.get("userName"));
+        user.setFullName((String) userData.get("fullName"));
+        user.setPhoneNumber((String) userData.get("phoneNumber"));
+        user.setNameBaby((String) userData.get("nameBaby"));
+        user.setbDayBaby((String) userData.get("bDayBaby"));
+
+        return user;
+    }
+
 }
