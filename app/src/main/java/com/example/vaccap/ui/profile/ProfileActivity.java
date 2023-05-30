@@ -23,6 +23,8 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.Objects;
+
 public class ProfileActivity extends DrawerBaseActivity {
 
     FirebaseFirestore mDatabase = FirebaseFirestore.getInstance();
@@ -60,9 +62,9 @@ public class ProfileActivity extends DrawerBaseActivity {
 
 
     public void showUserData(){
-        String userID = mAuth.getCurrentUser().getUid(); // Get the current user's ID
+        String userID = Objects.requireNonNull(mAuth.getCurrentUser()).getUid(); // Get the current user's ID
 
-        DocumentReference userDocRef = mDatabase.collection("users").document(userID); // Get the reference to the user's document
+        DocumentReference userDocRef = mDatabase.collection("/users/Patients/patients").document(userID); // Get the reference to the user's document
 
         userDocRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override

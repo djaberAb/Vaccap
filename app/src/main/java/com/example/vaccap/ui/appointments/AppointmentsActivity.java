@@ -1,4 +1,4 @@
-package com.example.vaccap.ui;
+package com.example.vaccap.ui.appointments;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -6,6 +6,7 @@ import android.os.Bundle;
 
 import com.example.vaccap.R;
 import com.example.vaccap.databinding.ActivityAppointmentsBinding;
+import com.example.vaccap.ui.DrawerBaseActivity;
 
 public class AppointmentsActivity extends DrawerBaseActivity {
 
@@ -16,5 +17,8 @@ public class AppointmentsActivity extends DrawerBaseActivity {
         activityAppointmentsBinding = ActivityAppointmentsBinding.inflate(getLayoutInflater());
         setContentView(activityAppointmentsBinding.getRoot());
         allocateActivityTitles("Appointments");
+
+
+
     }
 }

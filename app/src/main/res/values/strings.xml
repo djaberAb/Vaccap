@@ -35,4 +35,9 @@
     <string name="full_name">Full Name</string>
     <string name="phone_number">Phone Number</string>
     <string name="baby_s_name">Baby\'s Name</string>
+    <string name="accept">Accept</string>
+    <string name="appointment_date">Appointment date</string>
+    <string name="vaccine_type">vaccine Type</string>
+    <string name="appointment_time">Appointment time</string>
+    <string name="decline">Decline</string>
 </resources>

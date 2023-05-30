@@ -1,5 +1,8 @@
 package com.example.vaccap.ui.authentication;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -9,10 +12,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import com.example.vaccap.R;
+import com.example.vaccap.models.Clinic;
 import com.example.vaccap.models.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -24,41 +25,41 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.Objects;
 
-public class RegistrationActivity extends AppCompatActivity {
+
+public class ClinicRegistrationActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-    private EditText emailInput, passwordInput, userNameInput, phoneNumberInput, nameBabyInput, birthDayBabyInput;
+    private EditText emailInput, passwordInput, clinicNameInput, phoneNumberInput, nameBabyInput, birthDayBabyInput;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_registration);
+        setContentView(R.layout.activity_clinic_registration);
+
 
         emailInput = findViewById(R.id.emailSignup);
         passwordInput = findViewById(R.id.passwordSignup);
-        userNameInput = findViewById(R.id.clinicNameSignup);
+        clinicNameInput = findViewById(R.id.clinicNameSignup);
         phoneNumberInput = findViewById(R.id.phoneNumberSignup);
-        nameBabyInput = findViewById(R.id.nameBabySignup);
-        birthDayBabyInput = findViewById(R.id.birthdayBabySignup);
         TextView signinLink = findViewById(R.id.signin_link);
         Button signup_Btn = findViewById(R.id.signup_btn);
 
         mAuth = FirebaseAuth.getInstance();
 
-        signinLink.setOnClickListener(view-> startActivity(new Intent(RegistrationActivity.this, LoginActivity.class)));
+        signinLink.setOnClickListener(view-> startActivity(new Intent(ClinicRegistrationActivity.this, ClinicLoginActivity.class)));
 
         signup_Btn.setOnClickListener(view-> CreateUser());
+
     }
 
     private void CreateUser() {
         String email = emailInput.getText().toString();
         String password = passwordInput.getText().toString();
         String phone = phoneNumberInput.getText().toString();
-        String username = userNameInput.getText().toString();
-        String namebaby = nameBabyInput.getText().toString();
-        String bDay = birthDayBabyInput.getText().toString();
+        String clinicname = clinicNameInput.getText().toString();
 
         if (validateInput(email, password)) {
             mAuth.createUserWithEmailAndPassword(email, password)
@@ -71,32 +72,31 @@ public class RegistrationActivity extends AppCompatActivity {
                                 String userID = Objects.requireNonNull(mAuth.getCurrentUser()).getUid();
 
                                 // Create a new User object with null values
-                                User user = new User(email, username, "", phone, namebaby, bDay);
-                                db.collection("/users/Patients/patients").document(userID)
-                                        .set(user.toMap())
+                                Clinic clinic = new Clinic(email, clinicname, phone);
+                                db.collection("/users/Clinics/clinics").document(userID)
+                                        .set(clinic.toMap())
                                         .addOnSuccessListener(new OnSuccessListener<Void>() {
                                             @Override
                                             public void onSuccess(Void unused) {
-                                                Toast.makeText(RegistrationActivity.this, "User registered successfully", Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(ClinicRegistrationActivity.this, "Clinic registered successfully", Toast.LENGTH_SHORT).show();
                                                 // Proceed to the next fragment or activity
-                                                startActivity(new Intent(RegistrationActivity.this, LoginActivity.class));
+                                                startActivity(new Intent(ClinicRegistrationActivity.this, ClinicLoginActivity.class));
                                             }
                                         })
                                         .addOnFailureListener(new OnFailureListener() {
                                             @Override
                                             public void onFailure(@NonNull Exception e) {
                                                 // If sign up fails, display a message to the user.
-                                                Toast.makeText(RegistrationActivity.this, "Registration failed.", Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(ClinicRegistrationActivity.this, "Registration failed.", Toast.LENGTH_SHORT).show();
                                             }
                                         });
 
-
-                                Toast.makeText(RegistrationActivity.this, "User registered successfully", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(ClinicRegistrationActivity.this, "User registered successfully", Toast.LENGTH_SHORT).show();
                                 // Proceed to the next fragment or activity
-                                startActivity(new Intent(RegistrationActivity.this, LoginActivity.class));
+                                startActivity(new Intent(ClinicRegistrationActivity.this, LoginActivity.class));
                             } else {
                                 // If sign up fails, display a message to the user.
-                                Toast.makeText(RegistrationActivity.this, "Registration failed." ,Toast.LENGTH_SHORT).show();
+                                Toast.makeText(ClinicRegistrationActivity.this, "Registration failed." ,Toast.LENGTH_SHORT).show();
                             }
                         }
                     });

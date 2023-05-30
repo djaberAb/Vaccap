@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/authbackground"
-    tools:context=".ui.authentication.RegistrationActivity">
+    tools:context=".ui.authentication.ClinicRegistrationActivity">
 
     <TextView
         android:id="@+id/signin_link"
@@ -64,7 +63,7 @@
         android:drawablePadding="@dimen/activity_horizontal_margin"
         android:drawableTint="@color/green_drk"
         android:elevation="5dp"
-        android:hint="@string/user_name"
+        android:hint="clinic name"
         android:inputType="textPersonName"
         android:textAppearance="@style/TextAppearance.AppCompat.Body2"
         android:textColorHint="#616161"
@@ -99,58 +98,11 @@
         app:layout_constraintTop_toBottomOf="@+id/clinicNameSignup"
         tools:ignore="HardcodedText,VisualLintTextFieldSize" />
 
-    <EditText
-        android:id="@+id/nameBabySignup"
-        android:layout_width="0dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="32dp"
-        android:autofillHints=""
-        android:background="@color/etColor"
-        android:drawableStart="@drawable/baseline_baby_changing_station_24"
-        android:drawablePadding="@dimen/activity_horizontal_margin"
-        android:drawableTint="@color/green_drk"
-        android:elevation="5dp"
-        android:hint="@string/baby_s_name"
-        android:inputType="textPersonName"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-        android:textColorHint="#616161"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/phoneNumberSignup"
-        tools:ignore="HardcodedText,VisualLintTextFieldSize" />
-
-    <EditText
-        android:id="@+id/birthdayBabySignup"
-        android:layout_width="0dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="32dp"
-        android:background="@color/etColor"
-        android:drawableStart="@drawable/baseline_calendar_month_24"
-        android:drawablePadding="@dimen/activity_horizontal_margin"
-        android:drawableTint="@color/green_drk"
-        android:elevation="5dp"
-        android:hint="@string/date_of_birth"
-        android:inputType="date"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-        android:textColorHint="#616161"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/nameBabySignup"
-        tools:ignore="HardcodedText,VisualLintTextFieldSize" />
-
     <Button
         android:id="@+id/signup_btn"
         android:layout_width="350dp"
         android:layout_height="60dp"
-        android:layout_marginTop="308dp"
+        android:layout_marginTop="28dp"
         android:backgroundTint="#009688"
         android:text="Create an account"
         android:textAlignment="center"
@@ -158,7 +110,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.524"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/passwordSignup"
+        app:layout_constraintTop_toBottomOf="@+id/phoneNumberSignup"
         tools:ignore="HardcodedText,TextContrastCheck,VisualLintButtonSize" />
 
     <EditText
@@ -166,7 +118,7 @@
         android:layout_width="0dp"
         android:layout_height="50dp"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="52dp"
+        android:layout_marginTop="32dp"
         android:layout_marginEnd="32dp"
         android:autofillHints=""
         android:background="@color/etColor"
@@ -190,7 +142,6 @@
         android:layout_width="343dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="92dp"
         android:layout_marginEnd="80dp"
         android:autofillHints=""
         android:ems="10"
@@ -204,7 +155,16 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView2"
         tools:ignore="HardcodedText,TextSizeCheck,TextViewEdits" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="wrap_content"
+        android:layout_height="250dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/hostpital" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

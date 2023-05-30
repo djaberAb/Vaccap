@@ -1,5 +1,8 @@
 package com.example.vaccap.ui.authentication;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -9,9 +12,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
+import com.example.vaccap.ClinicMainActivity;
 import com.example.vaccap.MainActivity;
 import com.example.vaccap.R;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -19,7 +20,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
-public class LoginActivity extends AppCompatActivity {
+public class ClinicLoginActivity extends AppCompatActivity {
 
     private EditText emailInput;
     private EditText passwordInput;
@@ -33,7 +34,7 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.activity_clinic_login);
 
         emailInput = findViewById(R.id.emailSignin);
         passwordInput = findViewById(R.id.passwordSignin);
@@ -43,10 +44,9 @@ public class LoginActivity extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
         loginButton.setOnClickListener(view -> loginUser());
-        signupLink.setOnClickListener(view -> startActivity(new Intent(LoginActivity.this, RegistrationActivity.class)));
-        resetPasswordButton.setOnClickListener(view ->startActivity(new Intent(LoginActivity.this, PasswordResetActivity.class)));
+        signupLink.setOnClickListener(view -> startActivity(new Intent(ClinicLoginActivity.this, ClinicRegistrationActivity.class)));
+        resetPasswordButton.setOnClickListener(view ->startActivity(new Intent(ClinicLoginActivity.this, PasswordResetActivity.class)));
     }
-
     private void loginUser() {
         String email = emailInput.getText().toString();
         String password = passwordInput.getText().toString();
@@ -56,11 +56,11 @@ public class LoginActivity extends AppCompatActivity {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if (task.isSuccessful()){
-                        Toast.makeText(LoginActivity.this, "User logged successfully", Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                        Toast.makeText(ClinicLoginActivity.this, "Clinic logged successfully", Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(ClinicLoginActivity.this, ClinicMainActivity.class));
                     }
                     else {
-                        Toast.makeText(LoginActivity.this, "Log in failed." ,Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ClinicLoginActivity.this, "Log in failed." ,Toast.LENGTH_SHORT).show();
 
                     }
                 }

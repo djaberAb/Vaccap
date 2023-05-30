@@ -49,7 +49,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/vaccine_recycler_view"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="300dp"
         android:layout_marginHorizontal="18dp"
         android:layout_marginTop="52dp"
         android:backgroundTint="@color/white"
@@ -57,5 +57,16 @@
         app:layout_constraintHorizontal_bias="0.513"
         app:layout_constraintStart_toStartOf="@id/linearLayout"
         app:layout_constraintTop_toBottomOf="@id/linearLayout" />
+
+    <Button
+        android:id="@+id/makeAppointment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="56dp"
+        android:text="Make appointment"
+        app:layout_constraintEnd_toEndOf="@+id/vaccine_recycler_view"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="@+id/vaccine_recycler_view"
+        app:layout_constraintTop_toBottomOf="@+id/vaccine_recycler_view" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

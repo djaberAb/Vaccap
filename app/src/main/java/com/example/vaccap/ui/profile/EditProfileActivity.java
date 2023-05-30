@@ -27,8 +27,8 @@ import java.util.Map;
 public class EditProfileActivity extends AppCompatActivity {
 
 
-    FirebaseAuth mAuth = FirebaseAuth.getInstance();
-    FirebaseFirestore mDatabase = FirebaseFirestore.getInstance();
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        FirebaseFirestore mDatabase = FirebaseFirestore.getInstance();
     private TextView userName, fullName, phoneNumber, babyName, babyBirthDay, email;
     private Button updateBtn;
 
@@ -55,7 +55,7 @@ public class EditProfileActivity extends AppCompatActivity {
     public void updateUserData() {
         String userID = mAuth.getCurrentUser().getUid(); // Get the current user's ID
 
-        DocumentReference userDocRef = mDatabase.collection("users").document(userID); // Get the reference to the user's document
+        DocumentReference userDocRef = mDatabase.collection("/users/Patients/patients").document(userID); // Get the reference to the user's document
 
         String username = userName.getText().toString().trim();
         String fullname = fullName.getText().toString().trim();
@@ -85,7 +85,7 @@ public class EditProfileActivity extends AppCompatActivity {
     public void showUserData(){
         String userID = mAuth.getCurrentUser().getUid(); // Get the current user's ID
 
-        DocumentReference userDocRef = mDatabase.collection("users").document(userID); // Get the reference to the user's document
+        DocumentReference userDocRef = mDatabase.collection("/users/Patients/patients").document(userID); // Get the reference to the user's document
 
         userDocRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
