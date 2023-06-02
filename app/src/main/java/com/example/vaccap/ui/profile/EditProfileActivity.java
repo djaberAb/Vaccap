@@ -7,6 +7,7 @@ import static com.example.vaccap.models.User.fromSnapshot;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -23,7 +24,10 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.Calendar;
 import java.util.Map;
+import java.util.Objects;
+
 public class EditProfileActivity extends AppCompatActivity {
 
 
@@ -45,6 +49,7 @@ public class EditProfileActivity extends AppCompatActivity {
         babyBirthDay = findViewById(R.id.editDateOfBirthpr);
         showUserData();
 
+        babyBirthDay.setOnClickListener(v -> showDatePickerDialog());
         updateBtn = findViewById(R.id.updateBtn);
 
         updateBtn.setOnClickListener(v->{
@@ -53,7 +58,7 @@ public class EditProfileActivity extends AppCompatActivity {
     }
 
     public void updateUserData() {
-        String userID = mAuth.getCurrentUser().getUid(); // Get the current user's ID
+        String userID = Objects.requireNonNull(mAuth.getCurrentUser()).getUid(); // Get the current user's ID
 
         DocumentReference userDocRef = mDatabase.collection("/users/Patients/patients").document(userID); // Get the reference to the user's document
 
@@ -113,4 +118,27 @@ public class EditProfileActivity extends AppCompatActivity {
         });
     }
 
+    private void showDatePickerDialog() {
+        // Get the current date
+        Calendar calendar = Calendar.getInstance();
+        int year = calendar.get(Calendar.YEAR);
+        int month = calendar.get(Calendar.MONTH);
+        int dayOfMonth = calendar.get(Calendar.DAY_OF_MONTH);
+
+        // Create a new DatePickerDialog instance
+        DatePickerDialog datePickerDialog = new DatePickerDialog(
+                this,
+                (view, selectedYear, selectedMonth, selectedDayOfMonth) -> {
+                    // Update the EditText field with the selected date
+                    String selectedDate = selectedYear + "-" + (selectedMonth + 1) + "-" + selectedDayOfMonth;
+                    babyBirthDay.setText(selectedDate);
+                },
+                year,
+                month,
+                dayOfMonth
+        );
+
+        // Show the DatePickerDialog
+        datePickerDialog.show();
+    }
 }

@@ -1,5 +1,8 @@
 package com.example.vaccap.models;
 
+import static android.content.ContentValues.TAG;
+
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +13,8 @@ import android.widget.Toast;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.vaccap.R;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
 
@@ -43,7 +48,7 @@ public class AppointmentAdapter extends RecyclerView.Adapter<AppointmentAdapter.
             // Update the appointment status to "accepted"
             appointment.setStatus("accepted");
             // TODO: Save the updated appointment to a database or other data store
-
+            updateAppointmentStatusInFirestore(appointment);
             // Notify the adapter that the data set has changed
             notifyDataSetChanged();
             });
@@ -52,7 +57,7 @@ public class AppointmentAdapter extends RecyclerView.Adapter<AppointmentAdapter.
             appointment.setStatus("declined");
 
             // TODO: Save the updated appointment to a database or other data store
-
+            updateAppointmentStatusInFirestore(appointment);
             // Notify the adapter that the data set has changed
             notifyDataSetChanged();
         });
@@ -81,5 +86,20 @@ public class AppointmentAdapter extends RecyclerView.Adapter<AppointmentAdapter.
             acceptButton = itemView.findViewById(R.id.accept_button);
             declineButton = itemView.findViewById(R.id.decline_button);
         }
+    }
+
+    private void updateAppointmentStatusInFirestore(Appointment appointment) {
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        DocumentReference appointmentRef = db.collection("appointments").document(appointment.getId());
+
+        appointmentRef.update("status", appointment.getStatus())
+                .addOnSuccessListener(aVoid -> {
+                    Log.d(TAG, "Appointment status updated successfully");
+                    // TODO: Perform any additional actions after the appointment status is updated
+                })
+                .addOnFailureListener(e -> {
+                    Log.e(TAG, "Error updating appointment status", e);
+                    // TODO: Handle the error case
+                });
     }
 }

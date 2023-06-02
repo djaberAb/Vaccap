@@ -24,7 +24,6 @@ public class LoginActivity extends AppCompatActivity {
     private EditText emailInput;
     private EditText passwordInput;
     private Button loginButton;
-
     private TextView resetPasswordButton;
     private TextView signupLink;
 

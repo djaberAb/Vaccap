@@ -71,7 +71,7 @@ public class ClinicMainActivity extends AppCompatActivity {
 
     private void getAppointmentsByClinicName(String clinicName) {
         db.collection("appointments")
-                .whereEqualTo("clinic", clinicName)
+                .whereEqualTo("clinic", clinicName).whereEqualTo("status", "pending")
                 .get()
                 .addOnSuccessListener(onCompleteListener -> {
                     appointments = new ArrayList<>();

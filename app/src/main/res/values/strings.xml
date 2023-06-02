@@ -40,4 +40,14 @@
     <string name="vaccine_type">vaccine Type</string>
     <string name="appointment_time">Appointment time</string>
     <string name="decline">Decline</string>
+
+    <string-array name="vaccines">
+        <item>New Born</item>
+        <item>2 Months</item>
+        <item>4 Months</item>
+        <item>6 Months</item>
+        <item>8 Months</item>
+        <item>12 Months</item>
+        <item>15 Months</item>
+    </string-array>
 </resources>

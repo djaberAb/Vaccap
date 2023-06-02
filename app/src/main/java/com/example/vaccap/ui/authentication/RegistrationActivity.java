@@ -1,5 +1,6 @@
 package com.example.vaccap.ui.authentication;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -22,14 +23,15 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.Calendar;
 import java.util.Objects;
 
 public class RegistrationActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
-
-    private EditText emailInput, passwordInput, userNameInput, phoneNumberInput, nameBabyInput, birthDayBabyInput;
+    private EditText emailInput, passwordInput, userNameInput, phoneNumberInput, nameBabyInput;
+    private TextView  birthDayBabyInput;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +48,8 @@ public class RegistrationActivity extends AppCompatActivity {
         Button signup_Btn = findViewById(R.id.signup_btn);
 
         mAuth = FirebaseAuth.getInstance();
+
+        birthDayBabyInput.setOnClickListener(view -> showDatePickerDialog());
 
         signinLink.setOnClickListener(view-> startActivity(new Intent(RegistrationActivity.this, LoginActivity.class)));
 
@@ -142,5 +146,29 @@ public class RegistrationActivity extends AppCompatActivity {
     private boolean isValidPassword(String password) {
         // Add your password validation logic here
         return !TextUtils.isEmpty(password) && password.length() >= 8;
+    }
+
+    private void showDatePickerDialog() {
+        // Get the current date
+        Calendar calendar = Calendar.getInstance();
+        int year = calendar.get(Calendar.YEAR);
+        int month = calendar.get(Calendar.MONTH);
+        int dayOfMonth = calendar.get(Calendar.DAY_OF_MONTH);
+
+        // Create a new DatePickerDialog instance
+        DatePickerDialog datePickerDialog = new DatePickerDialog(
+                this,
+                (view, selectedYear, selectedMonth, selectedDayOfMonth) -> {
+                    // Update the EditText field with the selected date
+                    String selectedDate = selectedYear + "-" + (selectedMonth + 1) + "-" + selectedDayOfMonth;
+                    birthDayBabyInput.setText(selectedDate);
+                },
+                year,
+                month,
+                dayOfMonth
+        );
+
+        // Show the DatePickerDialog
+        datePickerDialog.show();
     }
 }

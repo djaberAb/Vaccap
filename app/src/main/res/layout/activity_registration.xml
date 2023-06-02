@@ -123,10 +123,11 @@
         app:layout_constraintTop_toBottomOf="@+id/phoneNumberSignup"
         tools:ignore="HardcodedText,VisualLintTextFieldSize" />
 
-    <EditText
+    <TextView
         android:id="@+id/birthdayBabySignup"
         android:layout_width="0dp"
         android:layout_height="50dp"
+        android:gravity="center_vertical"
         android:layout_marginStart="32dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="32dp"
@@ -136,7 +137,6 @@
         android:drawableTint="@color/green_drk"
         android:elevation="5dp"
         android:hint="@string/date_of_birth"
-        android:inputType="date"
         android:textAppearance="@style/TextAppearance.AppCompat.Body2"
         android:textColorHint="#616161"
         android:textSize="16sp"
