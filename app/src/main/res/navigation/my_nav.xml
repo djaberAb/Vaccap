@@ -2,4 +2,11 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/my_nav" />
+    android:id="@+id/my_nav"
+    app:startDestination="@id/PAppointmentFragment">
+    <fragment
+        android:id="@+id/PAppointmentFragment"
+        android:name="com.example.vaccap.PAppointmentFragment"
+        android:label="fragment_p_appointment"
+        tools:layout="@layout/fragment_p_appointment" />
+</navigation>

@@ -10,17 +10,17 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="#93DC82"
         android:orientation="vertical"
-        android:background="#EAE7C8"
         android:padding="16dp">
 
         <TextView
             android:id="@+id/appointment_clinic_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/user_name"
+            android:text="@string/clinic_name"
             android:textColor="@color/black"
-            android:textSize="16sp" />
+            android:textSize="18sp" />
 
         <TextView
             android:id="@+id/appointment_date"
@@ -28,7 +28,7 @@
             android:layout_height="wrap_content"
             android:text="@string/appointment_date"
             android:textColor="@color/black"
-            android:textSize="16sp" />
+            android:textSize="18sp" />
 
         <TextView
             android:id="@+id/appointment_time"
@@ -36,7 +36,7 @@
             android:layout_height="wrap_content"
             android:text="@string/appointment_time"
             android:textColor="@color/black"
-            android:textSize="16sp" />
+            android:textSize="18sp" />
 
         <TextView
             android:id="@+id/appointment_type"
@@ -44,34 +44,13 @@
             android:layout_height="wrap_content"
             android:text="@string/vaccine_type"
             android:textColor="@color/black"
-            android:textSize="16sp" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
+            android:textSize="18sp" />
+        <TextView
+            android:id="@+id/appointment_status"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/accept_button"
-                style="?android:attr/buttonBarButtonStyle"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="4dp"
-                android:layout_weight="1"
-                android:backgroundTint="@color/green_drk"
-                android:text="@string/accept"
-                android:textColor="@color/white" />
-
-            <Button
-                android:id="@+id/decline_button"
-                style="?android:attr/buttonBarButtonStyle"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="4dp"
-                android:layout_weight="1"
-                android:backgroundTint="@color/green_drk"
-                android:text="@string/decline"
-                android:textColor="@color/white" />
-        </LinearLayout>
+            android:text="status"
+            android:textColor="@color/black"
+            android:textSize="18sp" />
     </LinearLayout>
 </com.google.android.material.card.MaterialCardView>

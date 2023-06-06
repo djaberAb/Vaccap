@@ -40,6 +40,9 @@
     <string name="vaccine_type">vaccine Type</string>
     <string name="appointment_time">Appointment time</string>
     <string name="decline">Decline</string>
+    <string name="clinic_name">Clinic name</string>
+    <string name="declined_appointments_list">Declined Appointments list</string>
+    <string name="accepted_appointments_list">Accepted Appointments list</string>
 
     <string-array name="vaccines">
         <item>New Born</item>

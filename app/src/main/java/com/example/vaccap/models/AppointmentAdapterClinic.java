@@ -8,7 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -20,11 +19,11 @@ import org.checkerframework.checker.nullness.qual.NonNull;
 
 import java.util.List;
 
-public class AppointmentAdapter extends RecyclerView.Adapter<AppointmentAdapter.AppointmentViewHolder> {
+public class AppointmentAdapterClinic extends RecyclerView.Adapter<AppointmentAdapterClinic.AppointmentViewHolder> {
 
     private List<Appointment> appointments;
 
-    public AppointmentAdapter(List<Appointment> appointments) {
+    public AppointmentAdapterClinic(List<Appointment> appointments) {
         this.appointments = appointments;
     }
 
@@ -47,7 +46,7 @@ public class AppointmentAdapter extends RecyclerView.Adapter<AppointmentAdapter.
         holder.acceptButton.setOnClickListener(v -> {
             // Update the appointment status to "accepted"
             appointment.setStatus("accepted");
-            // TODO: Save the updated appointment to a database or other data store
+            //Save the updated appointment to a database or other data store
             updateAppointmentStatusInFirestore(appointment);
             // Notify the adapter that the data set has changed
             notifyDataSetChanged();
@@ -56,7 +55,7 @@ public class AppointmentAdapter extends RecyclerView.Adapter<AppointmentAdapter.
         holder.declineButton.setOnClickListener(v -> { // Update the appointment status to "declined"
             appointment.setStatus("declined");
 
-            // TODO: Save the updated appointment to a database or other data store
+            //Save the updated appointment to a database or other data store
             updateAppointmentStatusInFirestore(appointment);
             // Notify the adapter that the data set has changed
             notifyDataSetChanged();
@@ -79,7 +78,7 @@ public class AppointmentAdapter extends RecyclerView.Adapter<AppointmentAdapter.
 
         public AppointmentViewHolder(@NonNull View itemView) {
             super(itemView);
-            userNameTextView = itemView.findViewById(R.id.appointment_user_name);
+            userNameTextView = itemView.findViewById(R.id.appointment_clinic_name);
             dateTextView = itemView.findViewById(R.id.appointment_date);
             timeTextView = itemView.findViewById(R.id.appointment_time);
             typeTextView = itemView.findViewById(R.id.appointment_type);

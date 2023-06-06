@@ -3,29 +3,26 @@ package com.example.vaccap;
 import static android.content.ContentValues.TAG;
 import static com.example.vaccap.models.Clinic.fromSnapshot;
 
-import androidx.annotation.NonNull;
+import android.content.Intent;
+import android.os.Bundle;
+import android.util.Log;
+import android.widget.Button;
+import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Intent;
-import android.os.Bundle;
-import android.util.Log;
-import android.widget.Toast;
-
 import com.example.vaccap.models.Appointment;
-import com.example.vaccap.models.AppointmentAdapter;
+import com.example.vaccap.models.AppointmentAdapterClinic;
 import com.example.vaccap.models.Clinic;
 import com.example.vaccap.ui.authentication.PatientORClinicActivity;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,6 +34,7 @@ public class ClinicMainActivity extends AppCompatActivity {
     private FirebaseFirestore db;
     private FirebaseAuth mAuth;
     private String clinicName;
+    private Button lougout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +47,12 @@ public class ClinicMainActivity extends AppCompatActivity {
 
         String userID = mAuth.getUid();
         getClinicName(userID);
+
+        lougout = findViewById(R.id.logoutClinic);
+        lougout.setOnClickListener(v -> {
+            mAuth.signOut();
+            startActivity(new Intent(ClinicMainActivity.this, PatientORClinicActivity.class));
+        });
     }
 
     private void getClinicName(String userID) {
@@ -92,7 +96,7 @@ public class ClinicMainActivity extends AppCompatActivity {
         // Set up the RecyclerView
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         appointmentsRecyclerView.setLayoutManager(layoutManager);
-        AppointmentAdapter adapter = new AppointmentAdapter(appointments);
+        AppointmentAdapterClinic adapter = new AppointmentAdapterClinic(appointments);
         appointmentsRecyclerView.setAdapter(adapter);
     }
 
