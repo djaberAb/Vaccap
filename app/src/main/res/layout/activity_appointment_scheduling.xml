@@ -3,42 +3,52 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_marginHorizontal="18dp"
     android:layout_height="match_parent"
+    android:background="@drawable/appointmentbg"
     tools:context=".ui.appointments.AppointmentSchedulingActivity">
 
     <TextView
         android:id="@+id/date_input"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginHorizontal="18dp"
         android:layout_marginTop="44dp"
+        android:background="#A6FFFFFF"
+        android:elevation="5dp"
+        android:gravity="center_vertical"
         android:hint="Appointment Date"
         android:inputType="none"
-        android:gravity="center_vertical"
-        android:textSize="18sp"
+        android:keyboardNavigationCluster="false"
         android:minHeight="48dp"
+        android:textSize="18sp"
         app:layout_constraintTop_toBottomOf="@+id/time_input"
-        tools:layout_editor_absoluteX="0dp"
-        android:keyboardNavigationCluster="false"/>
+        tools:layout_editor_absoluteX="0dp" />
 
     <Spinner
         android:id="@+id/clinicName"
         android:layout_width="match_parent"
         android:layout_height="48dp"
+        android:layout_marginHorizontal="18dp"
         android:layout_marginTop="44dp"
+        android:background="#A6FFFFFF"
+        android:elevation="5dp"
         android:minHeight="48dp"
-        app:layout_constraintTop_toBottomOf="@+id/date_input"/>
+        app:layout_constraintTop_toBottomOf="@+id/date_input"
+        tools:layout_editor_absoluteX="18dp" />
 
     <TextView
         android:id="@+id/time_input"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginHorizontal="18dp"
         android:layout_marginTop="44dp"
-        android:hint="Appointment Time"
-        android:textSize="18sp"
+        android:background="#A6FFFFFF"
+        android:elevation="5dp"
         android:gravity="center_vertical"
-        android:minHeight="48dp"
+        android:hint="Appointment Time"
         android:inputType="none"
+        android:minHeight="48dp"
+        android:textSize="18sp"
         app:layout_constraintTop_toBottomOf="@+id/type_vaccine_input"
         tools:layout_editor_absoluteX="0dp" />
 
@@ -46,14 +56,19 @@
         android:id="@+id/type_vaccine_input"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginHorizontal="18dp"
         android:layout_marginTop="120dp"
+        android:background="#A6FFFFFF"
         android:minHeight="48dp"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="18dp"
+        android:elevation="5dp" />
 
     <Button
         android:id="@+id/request_appointment_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginHorizontal="18dp"
         android:layout_marginTop="136dp"
         android:minHeight="60dp"
         android:text="Request Appointment"

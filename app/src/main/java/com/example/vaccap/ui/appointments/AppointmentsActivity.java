@@ -18,7 +18,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AppointmentsActivity extends DrawerBaseActivity {
-
     ActivityAppointmentsBinding activityAppointmentsBinding;
     TabLayout tabLayout;
     ViewPager viewPager;

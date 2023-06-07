@@ -6,6 +6,14 @@ import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.CancellationSignal;
+import android.os.ParcelFileDescriptor;
+import android.print.PageRange;
+import android.print.PrintAttributes;
+import android.print.PrintDocumentAdapter;
+import android.print.PrintDocumentInfo;
+import android.print.PrintJob;
+import android.print.PrintManager;
 import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.View;
@@ -25,7 +33,16 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.Element;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.PdfWriter;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -76,12 +93,15 @@ public class AppointmentSchedulingActivity extends AppCompatActivity implements 
     private void requestAppointment() {
         String date = this.date.getText().toString();
         String time = this.time.getText().toString();
-        String type = this.type.getSelectedItem().toString();// Get the selected item from the spinner
+        String type = this.type.getSelectedItem().toString();
         String clinic = clinicName.getSelectedItem().toString();
-
 
         Appointment appointment = new Appointment(date, time, type, clinic, patientName, "pending");
 
+        // create and print the PDF document
+        createAndPrintPdf(appointment);
+
+        // add the appointment to Firestore
         addAppointmentToFirestore(appointment);
     }
 
@@ -118,6 +138,7 @@ public class AppointmentSchedulingActivity extends AppCompatActivity implements 
                 .addOnSuccessListener(aVoid -> Log.d(TAG, "Appointment status updated"))
                 .addOnFailureListener(e -> Log.e(TAG, "Error updating appointment status", e));
     }
+
     private void getPatientName() {
         String userId = Objects.requireNonNull(auth.getCurrentUser()).getUid();
         DocumentReference userDocRef = db.collection("/users/Patients/patients").document(userId);
@@ -156,7 +177,7 @@ public class AppointmentSchedulingActivity extends AppCompatActivity implements 
     private void showTimePickerDialog() {
         // Get the current time
         Calendar calendar = Calendar.getInstance();
-        int hour =calendar.get(Calendar.HOUR_OF_DAY);
+        int hour = calendar.get(Calendar.HOUR_OF_DAY);
         int minute = calendar.get(Calendar.MINUTE);
 
         // Create a new TimePickerDialog instance
@@ -207,4 +228,101 @@ public class AppointmentSchedulingActivity extends AppCompatActivity implements 
                     }
                 });
     }
+
+    private void createAndPrintPdf(Appointment appointment) {
+        // create a new PDF document
+        Document document = new Document();
+
+        try {
+            // create a new pdf writer
+            PdfWriter.getInstance(document, new FileOutputStream("appointment.pdf"));
+
+            // open the document for writing
+            document.open();
+
+            // add the appointment details to the document
+            Paragraph heading = new Paragraph("Appointment Details");
+            heading.setAlignment(Element.ALIGN_CENTER);
+            document.add(heading);
+
+            document.add(new Paragraph("Date: " + appointment.getDate()));
+            document.add(new Paragraph("Time: " + appointment.getTime()));
+            document.add(new Paragraph("Type: " + appointment.getType()));
+            document.add(new Paragraph("Clinic: " + appointment.getClinic()));
+            document.add(new Paragraph("Patient Name: " + appointment.getPatient()));
+
+            // close the document
+            document.close();
+
+            // print the document
+            printPdf();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void printPdf() {
+        // get the file path of the PDF document
+        String filePath = getFilesDir() + "/appointment.pdf";
+        File file = new File(filePath);
+
+        // create a new print job name
+        String jobName = getString(R.string.app_name) + " Appointment";
+
+        // create a new print job
+        PrintJob printJob = getSystemService(PrintManager.class).print(jobName, new PrintDocumentAdapter() {
+            @Override
+            public void onLayout(PrintAttributes oldAttributes, PrintAttributes newAttributes, CancellationSignal cancellationSignal, LayoutResultCallback callback, Bundle extras) {
+                if (cancellationSignal.isCanceled()) {
+                    callback.onLayoutCancelled();
+                    return;
+                }
+
+                PrintDocumentInfo.Builder builder = new PrintDocumentInfo.Builder("document.pdf")
+                        .setContentType(PrintDocumentInfo.CONTENT_TYPE_DOCUMENT)
+                        .setPageCount(1);
+
+                PrintDocumentInfo info = builder.build();
+                callback.onLayoutFinished(info, true);
+            }
+
+            @Override
+            public void onWrite(PageRange[] pages, ParcelFileDescriptor destination, CancellationSignal cancellationSignal, WriteResultCallback callback) {
+                try {
+                    FileInputStream input = new FileInputStream(file);
+                    OutputStream output = new FileOutputStream(destination.getFileDescriptor());
+
+                    byte[] buf = new byte[1024];
+                    int bytesRead;
+
+                    while ((bytesRead = input.read(buf)) > 0) {
+                        output.write(buf, 0, bytesRead);
+                    }
+
+                    callback.onWriteFinished(new PageRange[]{PageRange.ALL_PAGES});
+                    input.close();
+                    output.close();
+                } catch (FileNotFoundException e) {
+                    Log.e(TAG, "File not found: " + e.getMessage());
+                } catch (Exception e) {
+                    Log.e(TAG, "Error printing PDF: " + e.getMessage());
+                }
+            }
+
+            @Override
+            public void onFinish() {
+                super.onFinish();
+
+                // delete the PDF file after printing
+                File file = new File(getFilesDir() + "/appointment.pdf");
+                file.delete();
+            }
+        }, null);
+
+        // notify the user if the print job was unsuccessful
+        if (printJob == null) {
+            Toast.makeText(this, "Unable to print appointment", Toast.LENGTH_SHORT).show();
+        }
+    }
+
 }
