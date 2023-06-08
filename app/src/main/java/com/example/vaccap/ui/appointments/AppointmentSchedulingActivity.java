@@ -5,15 +5,9 @@ import static android.content.ContentValues.TAG;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
-import android.os.CancellationSignal;
-import android.os.ParcelFileDescriptor;
-import android.print.PageRange;
-import android.print.PrintAttributes;
-import android.print.PrintDocumentAdapter;
-import android.print.PrintDocumentInfo;
-import android.print.PrintJob;
-import android.print.PrintManager;
 import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.View;
@@ -25,7 +19,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.FileProvider;
 
+import com.example.vaccap.MainActivity;
 import com.example.vaccap.R;
 import com.example.vaccap.models.Appointment;
 import com.example.vaccap.models.User;
@@ -39,10 +35,8 @@ import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.PdfWriter;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.OutputStream;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -98,11 +92,11 @@ public class AppointmentSchedulingActivity extends AppCompatActivity implements 
 
         Appointment appointment = new Appointment(date, time, type, clinic, patientName, "pending");
 
-        // create and print the PDF document
-        createAndPrintPdf(appointment);
-
         // add the appointment to Firestore
         addAppointmentToFirestore(appointment);
+
+        // create and print the PDF document
+        downloadAndPrintPdf(appointment);
     }
 
     private void addAppointmentToFirestore(Appointment appointment) {
@@ -125,7 +119,6 @@ public class AppointmentSchedulingActivity extends AppCompatActivity implements 
                         }
                     });
                     Toast.makeText(this, "Appointment requested successfully", Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent(AppointmentSchedulingActivity.this, Appointment.class));
                 })
                 .addOnFailureListener(e -> {
                     Log.e(TAG, "Error adding appointment", e);
@@ -235,7 +228,9 @@ public class AppointmentSchedulingActivity extends AppCompatActivity implements 
 
         try {
             // create a new pdf writer
-            PdfWriter.getInstance(document, new FileOutputStream("appointment.pdf"));
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                PdfWriter.getInstance(document, Files.newOutputStream(Paths.get(getExternalFilesDir(null) + "/appointment.pdf")));
+            }
 
             // open the document for writing
             document.open();
@@ -254,75 +249,23 @@ public class AppointmentSchedulingActivity extends AppCompatActivity implements 
             // close the document
             document.close();
 
-            // print the document
-            printPdf();
+            // show a Toast message to notify the user that the PDF has been saved
+            Toast.makeText(this, "Appointment PDF saved to device storage", Toast.LENGTH_SHORT).show();
+
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    private void printPdf() {
-        // get the file path of the PDF document
-        String filePath = getFilesDir() + "/appointment.pdf";
-        File file = new File(filePath);
+    private void downloadAndPrintPdf(Appointment appointment) {
+        createAndPrintPdf(appointment);
 
-        // create a new print job name
-        String jobName = getString(R.string.app_name) + " Appointment";
-
-        // create a new print job
-        PrintJob printJob = getSystemService(PrintManager.class).print(jobName, new PrintDocumentAdapter() {
-            @Override
-            public void onLayout(PrintAttributes oldAttributes, PrintAttributes newAttributes, CancellationSignal cancellationSignal, LayoutResultCallback callback, Bundle extras) {
-                if (cancellationSignal.isCanceled()) {
-                    callback.onLayoutCancelled();
-                    return;
-                }
-
-                PrintDocumentInfo.Builder builder = new PrintDocumentInfo.Builder("document.pdf")
-                        .setContentType(PrintDocumentInfo.CONTENT_TYPE_DOCUMENT)
-                        .setPageCount(1);
-
-                PrintDocumentInfo info = builder.build();
-                callback.onLayoutFinished(info, true);
-            }
-
-            @Override
-            public void onWrite(PageRange[] pages, ParcelFileDescriptor destination, CancellationSignal cancellationSignal, WriteResultCallback callback) {
-                try {
-                    FileInputStream input = new FileInputStream(file);
-                    OutputStream output = new FileOutputStream(destination.getFileDescriptor());
-
-                    byte[] buf = new byte[1024];
-                    int bytesRead;
-
-                    while ((bytesRead = input.read(buf)) > 0) {
-                        output.write(buf, 0, bytesRead);
-                    }
-
-                    callback.onWriteFinished(new PageRange[]{PageRange.ALL_PAGES});
-                    input.close();
-                    output.close();
-                } catch (FileNotFoundException e) {
-                    Log.e(TAG, "File not found: " + e.getMessage());
-                } catch (Exception e) {
-                    Log.e(TAG, "Error printing PDF: " + e.getMessage());
-                }
-            }
-
-            @Override
-            public void onFinish() {
-                super.onFinish();
-
-                // delete the PDF file after printing
-                File file = new File(getFilesDir() + "/appointment.pdf");
-                file.delete();
-            }
-        }, null);
-
-        // notify the user if the print job was unsuccessful
-        if (printJob == null) {
-            Toast.makeText(this, "Unable to print appointment", Toast.LENGTH_SHORT).show();
-        }
+        // create an Intent to open the PDF file with a PDF viewer app
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        Uri uri = FileProvider.getUriForFile(this, getApplicationContext().getPackageName() + ".provider", new File(getExternalFilesDir(null), "appointment.pdf"));
+        intent.setDataAndType(uri, "/storage/emulated/0/Download/application/pdf");
+        intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
     }
 
 }
