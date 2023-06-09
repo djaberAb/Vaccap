@@ -10,7 +10,7 @@ import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import com.example.vaccap.R;
-import com.example.vaccap.ui.authentication.PatientORClinicActivity;
+import com.example.vaccap.ui.authentication.PatientORAdminActivity;
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -58,7 +58,7 @@ public class AdminMainActivity extends AppCompatActivity {
         super.onStart();
         FirebaseUser user = mAuth.getCurrentUser();
         if (user == null) {
-            startActivity(new Intent(AdminMainActivity.this, PatientORClinicActivity.class));
+            startActivity(new Intent(AdminMainActivity.this, PatientORAdminActivity.class));
         }
     }
 

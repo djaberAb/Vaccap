@@ -13,7 +13,7 @@ import com.example.vaccap.models.adapters.VaccineAdapter;
 import com.example.vaccap.models.VaccineInfo;
 import com.example.vaccap.ui.DrawerBaseActivity;
 import com.example.vaccap.ui.appointments.AppointmentSchedulingActivity;
-import com.example.vaccap.ui.authentication.PatientORClinicActivity;
+import com.example.vaccap.ui.authentication.PatientORAdminActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -67,7 +67,7 @@ public class MainActivity extends DrawerBaseActivity{
         super.onStart();
         FirebaseUser user = mAuth.getCurrentUser();
         if (user == null) {
-            startActivity(new Intent(MainActivity.this, PatientORClinicActivity.class));
+            startActivity(new Intent(MainActivity.this, PatientORAdminActivity.class));
         }
 //        startActivity(new Intent(MainActivity.this, LoginActivity.class));
     }

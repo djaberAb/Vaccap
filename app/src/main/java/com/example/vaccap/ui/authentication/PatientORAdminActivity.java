@@ -1,14 +1,14 @@
 package com.example.vaccap.ui.authentication;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.vaccap.R;
 
-public class PatientORClinicActivity extends AppCompatActivity {
+public class PatientORAdminActivity extends AppCompatActivity {
 
     private Button clinic, patient;
 
@@ -22,11 +22,11 @@ public class PatientORClinicActivity extends AppCompatActivity {
         patient = findViewById(R.id.patient);
 
         clinic.setOnClickListener(v -> {
-            startActivity(new Intent(PatientORClinicActivity.this, ClinicLoginActivity.class));
+            startActivity(new Intent(PatientORAdminActivity.this, AdminLoginActivity.class));
         });
 
         patient.setOnClickListener(v -> {
-            startActivity(new Intent(PatientORClinicActivity.this, LoginActivity.class));
+            startActivity(new Intent(PatientORAdminActivity.this, LoginActivity.class));
         });
     }
 }

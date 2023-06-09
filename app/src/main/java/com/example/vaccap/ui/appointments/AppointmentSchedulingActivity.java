@@ -21,8 +21,12 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.FileProvider;
+import androidx.work.Data;
+import androidx.work.OneTimeWorkRequest;
+import androidx.work.WorkManager;
 
 import com.example.vaccap.MainActivity;
+import com.example.vaccap.NotificationWorker;
 import com.example.vaccap.R;
 import com.example.vaccap.models.Appointment;
 import com.example.vaccap.models.User;
@@ -43,11 +47,15 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
+import java.util.concurrent.TimeUnit;
 
 public class AppointmentSchedulingActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
@@ -55,8 +63,6 @@ public class AppointmentSchedulingActivity extends AppCompatActivity implements 
     private TextView time;
     private Spinner type, clinicName;
     private Button requestAppointmentButton;
-
-    private List<String> clinicNames = new ArrayList<>();
     private FirebaseFirestore db;
     private FirebaseAuth auth;
 
@@ -90,7 +96,7 @@ public class AppointmentSchedulingActivity extends AppCompatActivity implements 
         getPatientName();
     }
 
-    private void requestAppointment() {
+    private void requestAppointment() throws RuntimeException {
         String date = this.date.getText().toString();
         String time = this.time.getText().toString();
         String type = this.type.getSelectedItem().toString();
@@ -100,6 +106,13 @@ public class AppointmentSchedulingActivity extends AppCompatActivity implements 
 
         // add the appointment to Firestore
         addAppointmentToFirestore(appointment);
+
+
+        try {
+            scheduleNotification(appointment);
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
 
         // create and print the PDF document
         downloadAndPrintPdf(appointment);
@@ -310,6 +323,33 @@ public class AppointmentSchedulingActivity extends AppCompatActivity implements 
             Log.e(TAG, "Error copying PDF file to appointment directory", e);
             Toast.makeText(this, "Failed to download appointment", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    private void scheduleNotification(Appointment appointment) throws ParseException {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        Date appointmentDateTime = dateFormat.parse(appointment.getDate() + " " + appointment.getTime());
+
+        // Calculate the time for the notification (24 hours before the appointment)
+        Calendar calendar = Calendar.getInstance();
+        assert appointmentDateTime != null;
+        calendar.setTime(appointmentDateTime);
+        calendar.add(Calendar.DATE, -1);
+        Date notificationDateTime = calendar.getTime();
+
+        // Create the input data for the worker
+        Data inputData = new Data.Builder()
+                .putString("appointment_date", appointment.getDate())
+                .putString("appointment_time", appointment.getTime())
+                .putString("clinic_name", appointment.getClinic())
+                .build();
+
+        // Schedule the notification using WorkManager
+        long delay = notificationDateTime.getTime() - System.currentTimeMillis();
+        OneTimeWorkRequest workRequest = new OneTimeWorkRequest.Builder(NotificationWorker.class)
+                .setInputData(inputData)
+                .setInitialDelay(delay, TimeUnit.MILLISECONDS)
+                .build();
+        WorkManager.getInstance(getApplicationContext()).enqueue(workRequest);
     }
 
 }

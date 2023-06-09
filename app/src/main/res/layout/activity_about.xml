@@ -1,9 +1,65 @@
-<?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
     tools:context=".ui.AboutActivity">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="40dp"
+        android:padding="16dp">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/about_baby_vaccinations"
+            android:textSize="24sp"
+            android:textStyle="bold"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/vaccinations_for_babies_are_determined_by_the_who_and_cdc_and_are_important_to_protect_against_serious_diseases_recommended_vaccines_include_measles_mumps_rubella_polio_hepatitis_b_and_chickenpox_vaccines_are_tested_for_safety_and_some_require_booster_shots_to_maintain_immunity_vaccinations_also_provide_herd_immunity_to_protect_the_community_while_side_effects_can_occur_they_are_typically_mild_and_serious_side_effects_are_rare"
+            android:layout_marginTop="16dp"
+            tools:ignore="VisualLintLongText" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="205dp"
+            android:contentDescription="@string/vaccination_image"
+            android:src="@drawable/little_doctor_05"
+            tools:ignore="ImageContrastCheck" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/why_vaccinations_are_important"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_marginTop="16dp"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/vaccination_is_important_because_it_protects_individuals_from_serious_and_life_threatening_diseases_prevents_outbreaks_provides_herd_immunity_is_cost_effective_and_can_lead_to_the_eradication_of_diseases_by_vaccinating_individuals_and_communities_can_improve_health_outcomes_and_reduce_the_burden_of_vaccine_preventable_diseases"
+            android:layout_marginTop="16dp"
+            tools:ignore="VisualLintLongText" />
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="205dp"
+            android:src="@drawable/vaccineabout"
+            android:contentDescription="@string/disease_image"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/protect_your_child"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_marginTop="16dp"/>
+        <Button
+            android:id="@+id/calltoaction"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/find_a_vaccination_center"
+            android:layout_marginTop="6dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="33dp"/>
+    </LinearLayout>
+</ScrollView>

@@ -1,5 +1,10 @@
 package com.example.vaccap.ui;
 
+import android.content.Intent;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.FrameLayout;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
@@ -7,15 +12,10 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
-import android.content.Intent;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.FrameLayout;
-
 import com.example.vaccap.MainActivity;
 import com.example.vaccap.R;
 import com.example.vaccap.ui.appointments.AppointmentsActivity;
-import com.example.vaccap.ui.authentication.PatientORClinicActivity;
+import com.example.vaccap.ui.authentication.PatientORAdminActivity;
 import com.example.vaccap.ui.profile.ProfileActivity;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
@@ -70,7 +70,7 @@ public class DrawerBaseActivity extends AppCompatActivity implements NavigationV
             overridePendingTransition(0, 0);
         } else if (itemId == R.id.nav_logout) {
             mAuth.signOut();
-            startActivity(new Intent(this, PatientORClinicActivity.class));
+            startActivity(new Intent(this, PatientORAdminActivity.class));
             overridePendingTransition(0, 0);
         }
 

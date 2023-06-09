@@ -46,6 +46,15 @@
     <string name="tab_layout">tab layout</string>
     <string name="view_pager">view pager</string>
     <string name="patients">Patients</string>
+    <string name="about_baby_vaccinations">About Baby Vaccinations</string>
+    <string name="vaccinations_for_babies_are_determined_by_the_who_and_cdc_and_are_important_to_protect_against_serious_diseases_recommended_vaccines_include_measles_mumps_rubella_polio_hepatitis_b_and_chickenpox_vaccines_are_tested_for_safety_and_some_require_booster_shots_to_maintain_immunity_vaccinations_also_provide_herd_immunity_to_protect_the_community_while_side_effects_can_occur_they_are_typically_mild_and_serious_side_effects_are_rare">Vaccinations for babies are determined by the WHO and CDC and are important to protect against serious diseases. Recommended vaccines include measles, mumps, rubella, polio, hepatitis B, and chickenpox. Vaccines are tested for safety and some require booster shots to maintain immunity. Vaccinations also provide herd immunity to protect the community. While side effects can occur, they are typically mild and serious side effects are rare.</string>
+    <string name="vaccination_image">Vaccination image</string>
+    <string name="why_vaccinations_are_important">Why Vaccinations are Important</string>
+    <string name="vaccination_is_important_because_it_protects_individuals_from_serious_and_life_threatening_diseases_prevents_outbreaks_provides_herd_immunity_is_cost_effective_and_can_lead_to_the_eradication_of_diseases_by_vaccinating_individuals_and_communities_can_improve_health_outcomes_and_reduce_the_burden_of_vaccine_preventable_diseases">Vaccination is important because it protects individuals from serious and life-threatening diseases, prevents outbreaks, provides herd immunity, is cost-effective, and can lead to the eradication of diseases. By vaccinating, individuals and communities can improve health outcomes and reduce the burden of vaccine-preventable diseases.</string>
+    <string name="disease_image">Disease image</string>
+    <string name="call_to_action">Call to Action</string>
+    <string name="find_a_vaccination_center">Find a Vaccination Center</string>
+    <string name="protect_your_child">Protect your child</string>
 
     <string-array name="vaccines">
         <item>New Born</item>
