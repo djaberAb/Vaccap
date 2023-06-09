@@ -12,8 +12,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.vaccap.ClinicMainActivity;
-import com.example.vaccap.MainActivity;
+import com.example.vaccap.admin.AdminMainActivity;
 import com.example.vaccap.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -57,7 +56,7 @@ public class ClinicLoginActivity extends AppCompatActivity {
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if (task.isSuccessful()){
                         Toast.makeText(ClinicLoginActivity.this, "Clinic logged successfully", Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(ClinicLoginActivity.this, ClinicMainActivity.class));
+                        startActivity(new Intent(ClinicLoginActivity.this, AdminMainActivity.class));
                     }
                     else {
                         Toast.makeText(ClinicLoginActivity.this, "Log in failed." ,Toast.LENGTH_SHORT).show();

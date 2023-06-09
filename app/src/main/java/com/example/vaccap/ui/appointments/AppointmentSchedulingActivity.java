@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.View;
@@ -35,6 +36,11 @@ import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.PdfWriter;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -100,10 +106,16 @@ public class AppointmentSchedulingActivity extends AppCompatActivity implements 
     }
 
     private void addAppointmentToFirestore(Appointment appointment) {
-        db.collection("appointments").add(appointment)
-                .addOnSuccessListener(documentReference -> {
-                    appointment.setId(documentReference.getId()); // Set the appointment ID
-                    appointmentDocRef = db.collection("appointments").document(appointment.getId()); // Use the appointment ID to get the document reference
+        // Generate a unique ID for the appointment document
+        String appointmentId = db.collection("appointments").document().getId();
+        appointment.setId(appointmentId);
+
+        // Add the appointment to Firestore using the generated ID
+        db.collection("appointments").document(appointmentId)
+                .set(appointment)
+                .addOnSuccessListener(aVoid -> {
+                    // Listen for updates to the appointment status
+                    DocumentReference appointmentDocRef = db.collection("appointments").document(appointmentId);
                     appointmentDocRef.addSnapshotListener((snapshot, e) -> {
                         if (e != null) {
                             Log.e(TAG, "Error listening for appointment updates", e);
@@ -118,7 +130,9 @@ public class AppointmentSchedulingActivity extends AppCompatActivity implements 
                             }
                         }
                     });
+
                     Toast.makeText(this, "Appointment requested successfully", Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(AppointmentSchedulingActivity.this, MainActivity.class));
                 })
                 .addOnFailureListener(e -> {
                     Log.e(TAG, "Error adding appointment", e);
@@ -260,12 +274,42 @@ public class AppointmentSchedulingActivity extends AppCompatActivity implements 
     private void downloadAndPrintPdf(Appointment appointment) {
         createAndPrintPdf(appointment);
 
-        // create an Intent to open the PDF file with a PDF viewer app
-        Intent intent = new Intent(Intent.ACTION_VIEW);
-        Uri uri = FileProvider.getUriForFile(this, getApplicationContext().getPackageName() + ".provider", new File(getExternalFilesDir(null), "appointment.pdf"));
-        intent.setDataAndType(uri, "/storage/emulated/0/Download/application/pdf");
-        intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        startActivity(intent);
+        // Get the external storage directory
+        File downloadsDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
+
+        // Create the Appointments directory if it doesn't exist
+        File appointmentsDir = new File(downloadsDir, "Appointments");
+        if (!appointmentsDir.exists()) {
+            appointmentsDir.mkdirs();
+        }
+
+        // Create the appointment PDF file
+        File appointmentFile = new File(appointmentsDir, "appointment.pdf");
+
+        try {
+            // Copy the generated PDF file to the appointment file
+            InputStream in = new FileInputStream(getExternalFilesDir(null) + "/appointment.pdf");
+            OutputStream out = new FileOutputStream(appointmentFile);
+            byte[] buffer = new byte[1024];
+            int read;
+            while ((read = in.read(buffer)) != -1) {
+                out.write(buffer, 0, read);
+            }
+            in.close();
+            out.flush();
+            out.close();
+
+            // create an Intent to open the PDF file with a PDF viewer app
+            Intent intent = new Intent(Intent.ACTION_VIEW);
+            Uri uri = FileProvider.getUriForFile(this, getApplicationContext().getPackageName() + ".provider", appointmentFile);
+            intent.setDataAndType(uri, "application/pdf");
+            intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intent);
+
+        } catch (IOException e) {
+            Log.e(TAG, "Error copying PDF file to appointment directory", e);
+            Toast.makeText(this, "Failed to download appointment", Toast.LENGTH_SHORT).show();
+        }
     }
 
 }

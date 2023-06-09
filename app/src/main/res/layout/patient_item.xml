@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:layout_marginHorizontal="20dp"
+    android:layout_marginVertical="4dp"
+    android:elevation="10dp"
+    android:background="@color/greenWhite_vaccapps"
+    android:padding="16dp">
+
+    <ImageView
+        android:id="@+id/clinic_logo"
+        android:layout_width="90dp"
+        android:layout_height="90dp"
+        android:src="@drawable/baseline_woman_24" />
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:layout_marginStart="16dp">
+
+        <TextView
+            android:id="@+id/mom_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Mom Name"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/mom_phone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Mom Phone Number"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/black"
+            android:textSize="14sp" />
+        <TextView
+            android:id="@+id/baby_age"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/baby_s_name"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/black"
+            android:textSize="14sp" />
+
+    </LinearLayout>
+
+</LinearLayout>

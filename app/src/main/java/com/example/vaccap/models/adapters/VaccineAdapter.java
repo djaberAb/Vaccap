@@ -1,15 +1,14 @@
-package com.example.vaccap.models;
+package com.example.vaccap.models.adapters;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.vaccap.MainActivity;
 import com.example.vaccap.R;
+import com.example.vaccap.models.VaccineInfo;
 
 import java.util.List;
 

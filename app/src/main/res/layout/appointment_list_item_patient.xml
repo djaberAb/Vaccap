@@ -1,56 +1,66 @@
-<?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/appointment_list_item_patient"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="8dp"
-    app:cardCornerRadius="16dp"
-    app:cardElevation="4dp">
+    android:orientation="vertical"
+    android:layout_marginVertical="6dp"
+    android:paddingHorizontal="20dp">
+
+    <TextView
+        android:id="@+id/clinic_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Clinic Name"
+        android:textSize="16sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/appointment_date_patient"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Date"
+        android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/appointment_time_patient"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Time"
+        android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/appointment_type_patient"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Type"
+        android:textSize="12sp" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#93DC82"
-        android:orientation="vertical"
-        android:padding="16dp">
+        android:orientation="horizontal"
+        android:layout_marginTop="8dp">
 
-        <TextView
-            android:id="@+id/appointment_clinic_name"
+        <Button
+            android:id="@+id/edit_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/clinic_name"
-            android:textColor="@color/black"
-            android:textSize="18sp" />
+            android:layout_marginStart="8dp"
+            android:text="Edit"
+            android:layout_weight="1"
+            android:textSize="11sp" />
 
-        <TextView
-            android:id="@+id/appointment_date"
+        <Button
+            android:id="@+id/cancel_button"
             android:layout_width="wrap_content"
+            android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:text="@string/appointment_date"
-            android:textColor="@color/black"
-            android:textSize="18sp" />
+            android:layout_marginStart="8dp"
+            android:backgroundTint="#E22F43"
 
-        <TextView
-            android:id="@+id/appointment_time"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/appointment_time"
-            android:textColor="@color/black"
-            android:textSize="18sp" />
+            android:text="Cancel"
+            android:textSize="11sp" />
 
-        <TextView
-            android:id="@+id/appointment_type"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/vaccine_type"
-            android:textColor="@color/black"
-            android:textSize="18sp" />
-        <TextView
-            android:id="@+id/appointment_status"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="status"
-            android:textColor="@color/black"
-            android:textSize="18sp" />
     </LinearLayout>
-</com.google.android.material.card.MaterialCardView>
+
+</LinearLayout>

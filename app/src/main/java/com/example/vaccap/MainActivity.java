@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.vaccap.databinding.ActivityMainBinding;
-import com.example.vaccap.models.VaccineAdapter;
+import com.example.vaccap.models.adapters.VaccineAdapter;
 import com.example.vaccap.models.VaccineInfo;
 import com.example.vaccap.ui.DrawerBaseActivity;
 import com.example.vaccap.ui.appointments.AppointmentSchedulingActivity;

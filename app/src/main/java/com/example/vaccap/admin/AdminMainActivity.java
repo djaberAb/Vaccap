@@ -1,15 +1,19 @@
-package com.example.vaccap.ui.appointments;
+package com.example.vaccap.admin;
 
+import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
-import com.example.vaccap.databinding.ActivityAppointmentsBinding;
-import com.example.vaccap.ui.DrawerBaseActivity;
+import com.example.vaccap.R;
+import com.example.vaccap.ui.authentication.PatientORClinicActivity;
 import com.google.android.material.tabs.TabLayout;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
@@ -17,26 +21,29 @@ import org.checkerframework.checker.nullness.qual.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AppointmentsActivity extends DrawerBaseActivity {
-    ActivityAppointmentsBinding activityAppointmentsBinding;
+public class AdminMainActivity extends AppCompatActivity {
+
+    private FirebaseAuth mAuth;
+
     TabLayout tabLayout;
     ViewPager viewPager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        activityAppointmentsBinding = ActivityAppointmentsBinding.inflate(getLayoutInflater());
-        setContentView(activityAppointmentsBinding.getRoot());
-        allocateActivityTitles("Appointments");
+        setContentView(R.layout.activity_admin_main);
+
+        mAuth = FirebaseAuth.getInstance();
+        onStart();
 
         // Get references to the TabLayout and ViewPager
-        tabLayout = activityAppointmentsBinding.tabLayout;
-        viewPager = activityAppointmentsBinding.viewPager;
+        tabLayout = findViewById(R.id.tabLayout);
+        viewPager = findViewById(R.id.viewPager);
 
         // Create a PagerAdapter that returns a Fragment for each tab
         PagerAdapter pagerAdapter = new PagerAdapter(getSupportFragmentManager(), FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
-        pagerAdapter.addFragment(new PendingFragment(), "Pending");
-        pagerAdapter.addFragment(new AcceptedFragment(), "Accepted");
-        pagerAdapter.addFragment(new DeclinedFragment(), "Declined");
+        pagerAdapter.addFragment(new AppointmentsFragment(), "Appointments");
+        pagerAdapter.addFragment(new ClinicsFragment(), "Clinics");
+        pagerAdapter.addFragment(new PatientsFragment(), "Patients");
 
         // Set the adapter on the ViewPager
         viewPager.setAdapter(pagerAdapter);
@@ -45,7 +52,18 @@ public class AppointmentsActivity extends DrawerBaseActivity {
         tabLayout.setupWithViewPager(viewPager);
     }
 
-    public static class PagerAdapter extends FragmentPagerAdapter {
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        FirebaseUser user = mAuth.getCurrentUser();
+        if (user == null) {
+            startActivity(new Intent(AdminMainActivity.this, PatientORClinicActivity.class));
+        }
+    }
+
+
+    private static class PagerAdapter extends FragmentPagerAdapter {
 
         private final List<Fragment> fragmentList = new ArrayList<>();
         private final List<String> fragmentTitleList = new ArrayList<>();
