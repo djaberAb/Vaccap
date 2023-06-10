@@ -50,6 +50,9 @@ public class AdminMainActivity extends AppCompatActivity {
 
         // Set up the TabLayout with the ViewPager
         tabLayout.setupWithViewPager(viewPager);
+
+        // Set the offscreen page limit to load all fragments in memory
+        viewPager.setOffscreenPageLimit(pagerAdapter.getCount() - 1);
     }
 
 

@@ -43,11 +43,12 @@ public class MainActivity extends DrawerBaseActivity{
         });
 
         vaccines = new ArrayList<>();
-        vaccines.add(new VaccineInfo("At Birth", "HepB"));
-        vaccines.add(new VaccineInfo("2 months", "HepB, DTaP, PCV, Hib, Polio, RV"));
-        vaccines.add(new VaccineInfo("4 months", "HepB, DTaP, PCV, Hib, Polio, RV"));
-        vaccines.add(new VaccineInfo("6 months", "HepB, DTaP, PCV, Hib³, Polio, RV⁴, Influenza⁵, COVID⁶"));
-        vaccines.add(new VaccineInfo("12 months and Older", "MMR, DTaP, PCV, Hib, Chickenpox, HepA⁷, Influenza⁵"));
+        vaccines.add(new VaccineInfo("At Birth", "HepB", true));
+        vaccines.add(new VaccineInfo("2 months", "HepB, DTaP, PCV, Hib, Polio, RV", true));
+        vaccines.add(new VaccineInfo("4 months", "HepB, DTaP, PCV, Hib, Polio, RV", true));
+        vaccines.add(new VaccineInfo("6 months", "HepB, DTaP, PCV, Hib³, Polio, RV⁴, Influenza⁵, COVID⁶", true));
+        vaccines.add(new VaccineInfo("8 months", "HepB, DTaP, PCV, Hib³, Polio, RV⁴, Influenza⁵, COVID⁶", true));
+        vaccines.add(new VaccineInfo("12 months and Older", "MMR, DTaP, PCV, Hib, Chickenpox, HepA⁷, Influenza⁵", true));
         // Add more vaccines here
 
         VaccineAdapter vaccineAdapter = new VaccineAdapter(vaccines);

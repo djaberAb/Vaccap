@@ -6,6 +6,7 @@
     android:layout_marginHorizontal="20dp"
     android:layout_marginVertical="4dp"
     android:background="@color/greenWhite_vaccapps"
+    android:elevation="5dp"
     android:padding="16dp">
 
     <ImageView

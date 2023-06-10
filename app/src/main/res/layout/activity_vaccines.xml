@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    android:background="@drawable/hbackground">
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingHorizontal="16dp">
+
+    <TextView
+        android:layout_marginTop="40dp"
+        android:id="@+id/clinic_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:text="Clinic Name Here" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="16dp"
+        android:background="@color/black" />
+
+    <TextView
+        android:id="@+id/vaccine_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:text="Available Vaccines" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Birth:"
+            android:textStyle="bold" />
+
+        <CheckBox
+            android:id="@+id/hepatitis_b_checkbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Hepatitis B vaccine: Hepatitis B virus, aluminum salts, yeast protein, and other ingredients." />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2 Months:"
+            android:textStyle="bold" />
+
+        <CheckBox
+            android:id="@+id/rotavirus_checkbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Rotavirus vaccine: Live rotavirus, sucrose, sodium chloride, and other ingredients." />
+
+        <CheckBox
+            android:id="@+id/dtap_checkbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="DTaP vaccine: Inactivated diphtheria, tetanus, and pertussis bacteria, aluminum salts, and other ingredients." />
+
+        <CheckBox
+            android:id="@+id/hib_checkbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Hib vaccine: Haemophilus influenzae type b bacteria, aluminum salts, and other ingredients." />
+
+        <CheckBox
+            android:id="@+id/pcv13_checkbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="PCV13 vaccine: Streptococcus pneumoniae bacteria, aluminum salts, and other ingredients." />
+
+        <CheckBox
+            android:id="@+id/polio_checkbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Polio vaccine: Inactivated poliovirus and other ingredients." />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="4 Months:"
+            android:textStyle="bold" />
+
+        <CheckBox
+            android:id="@+id/rotavirus_2_checkbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Rotavirus vaccine" />
+
+        <CheckBox
+            android:id="@+id/dtap_2_checkbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="DTaP vaccine" />
+
+        <CheckBox
+            android:id="@+id/hib_2_checkbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Hib vaccine" />
+
+        <CheckBox
+            android:id="@+id/pcv13_2_checkbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="PCV13 vaccine" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="6 Months:"
+            android:textStyle="bold" />
+
+        <CheckBox
+            android:id="@+id/rotavirus_3_checkbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Rotavirus vaccine" />
+
+        <CheckBox
+            android:id="@+id/dtap_3_checkbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:minHeight="48dp"
+            android:text="DTaP vaccine" />
+
+        <CheckBox
+            android:id="@+id/hib_3_checkbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Hib vaccine" />
+
+        <CheckBox
+            android:id="@+id/pcv13_3_checkbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="PCV13 vaccine" />
+
+        <CheckBox
+            android:id="@+id/polio_2_checkbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Polio vaccine" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="12-15 Months:"
+            android:textStyle="bold" />
+
+        <CheckBox
+            android:id="@+id/mmr_checkbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="MMR vaccine: Live measles,mumps, and rubella viruses and other ingredients." />
+
+        <CheckBox
+            android:id="@+id/varicella_checkbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Varicella vaccine: Live varicella virus and other ingredients." />
+
+        <CheckBox
+            android:id="@+id/hib_booster_checkbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Hib vaccine booster shot" />
+
+        <CheckBox
+            android:id="@+id/pcv13_booster_checkbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="PCV13 vaccine booster shot" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="12-23 Months:"
+            android:textStyle="bold" />
+
+        <CheckBox
+            android:id="@+id/hepatitis_a_checkbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Hepatitis A vaccine: Inactivated hepatitis A virus, aluminum salts, and other ingredients." />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="15-18 Months:"
+            android:textStyle="bold" />
+
+        <CheckBox
+            android:id="@+id/dtap_booster_checkbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="DTaP vaccine booster shot" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="4-6 Years:"
+            android:textStyle="bold" />
+
+        <CheckBox
+            android:id="@+id/dtap_booster_2_checkbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="DTaP vaccine booster shot" />
+
+        <CheckBox
+            android:id="@+id/mmr_booster_checkbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="MMR vaccine booster shot" />
+
+        <CheckBox
+            android:id="@+id/varicella_booster_checkbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Varicella vaccine booster shot" />
+
+        <CheckBox
+            android:id="@+id/polio_booster_checkbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Polio vaccine booster shot" />
+
+    </LinearLayout>
+
+</LinearLayout>
+
+</ScrollView>
